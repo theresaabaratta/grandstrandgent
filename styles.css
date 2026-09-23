@@ -82,14 +82,65 @@ a:hover { color: var(--sand); }
   min-height: 92vh;
   display: flex;
   align-items: center;
-  /* Swap in your own photo: images/hero.jpg */
-  background:
-    linear-gradient(110deg, rgba(11,13,18,0.96) 30%, rgba(11,13,18,0.55) 100%),
-    url("images/hero.jpg") center/cover no-repeat,
-    radial-gradient(circle at 80% 30%, #3a2a1a 0%, var(--ink) 60%);
+  background: radial-gradient(circle at 80% 30%, #3a2a1a 0%, var(--ink) 60%);
   padding: 7rem 0 5rem;
 }
 .hero-page { min-height: 52vh; }
+
+/* ---------- Photo slots ---------- */
+/* Each slot shows a labeled placeholder until its image file exists */
+.photo-slot {
+  position: relative;
+  overflow: hidden;
+  background: var(--night-2);
+  border: 1px solid var(--line);
+}
+.photo-slot::before {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  border: 1px dashed rgba(201, 163, 92, 0.35);
+  margin: 10px;
+}
+.photo-slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+.photo-hero {
+  aspect-ratio: 4 / 5;
+  max-width: 360px;       /* adjust this number to resize the hero photo */
+  margin-left: auto;
+}
+@media (max-width: 991.98px) {
+  .photo-hero { max-width: 300px; margin: 0 auto; }
+}
+.photo-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -1px -1px auto;
+  width: 38%;
+  height: 38%;
+  border-right: 2px solid var(--brass);
+  border-bottom: 2px solid var(--brass);
+  z-index: 2;
+  pointer-events: none;
+}
+.photo-gallery { aspect-ratio: 3 / 4; }
+.photo-gallery img { transition: transform .5s ease; }
+.photo-gallery:hover img { transform: scale(1.04); }
 
 .eyebrow {
   text-transform: uppercase;
